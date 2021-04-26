@@ -1,4 +1,4 @@
-package com.wazny;
+package com.wazny.strings;
 
 
 import org.springframework.boot.SpringApplication;
