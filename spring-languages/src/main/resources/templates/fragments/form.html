@@ -1,0 +1,18 @@
+
+<form th:method="${form_method}" th:action="${form_action}" th:object="${language}" th:fragment="form"
+      xmlns:th="http://www.thymeleaf.org">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name"  th:value="${language.name}" class="form-control">
+    </div>
+    <div class="form-group"><label for="creator">Creator</label><input type="text" id="creator" name="creator" th:value="${language.creator}" class="form-control" ></div>
+    <div class="form-group">
+        <label for="version">Current Version</label>
+        <input type="text" name="currentVersion" id="version" th:value="${language.currentVersion}" class="form-control">
+    </div>
+    <div class="form-group">
+        <!--/*@thymesVar id="form_caption" type="java.lang.String"*/-->
+        <input type="submit" class="btn btn-primary" name="submit" th:value="${form_caption}">
+    </div>
+
+</form>
