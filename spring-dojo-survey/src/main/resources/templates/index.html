@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dojo Survey</title>
+</head>
+<body>
+
+<!--/*@thymesVar id="answer" type="com.wazny.SurveyModel"*/-->
+<form th:unless="${answer}" method="post" action="/result">
+    <div>
+        <input type="text" name="name" placeholder="Your name">
+    </div>
+    <div>
+        <select name="dojoLocation">
+            <option th:each="loc: ${locations}" th:text="${loc}" th:value="${loc}"> </option>
+        </select>
+    </div>
+    <div>
+    <select name="favoriteLanguage">
+            <option th:each="lang: ${languages}" th:text="${lang}" th:value="${lang}"> </option>
+        </select>
+    </div>
+    <div>
+        <textarea name="comment" ></textarea>
+    <input type="submit">
+    </div>
+
+</form>
+<ul th:if="${answer}">
+    <li th:text="'Name: ' + ${answer.name}"></li>
+    <li th:text="'Location: ' + ${answer.dojoLocation}"></li>
+    <li th:text="'Language: ' + ${answer.favoriteLanguage}"></li>
+    <li th:text="'Comment: ' +  ${answer.comment}"></li>
+
+
+</ul>
+
+<a href="/" th:if="${answer}">Go back</a>
+</body>
+</html>
