@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Code</title>
 </head>
 <body>
 
-<form method="post" action="validate">
+<p class="error" th:if="${!valid}"> You must study harder!  </p>
+
+<p th:unless="${code}">What is the code</p>
+<form th:unless="${code}" method="post" action="/code">
     <input name="code" type="text">
-    <input type="submit" value="submit">
+    <input type="submit" value="Try Code">
 </form>
+
+<ul>
+<li th:if="${valid}" th:each="val: ${code}" th:text="${val}"></li>
+</ul>
 </body>
 </html>

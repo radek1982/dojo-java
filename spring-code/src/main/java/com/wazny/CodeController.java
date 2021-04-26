@@ -1,30 +1,38 @@
 package com.wazny;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Arrays;
+import java.util.List;
+@Controller
 public class CodeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index() {
-        return "index";
+    public ModelAndView index(@RequestParam(required = false) Boolean valid, ModelMap model) {
+
+        model.addAttribute("valid", valid == null || valid);
+        return new ModelAndView("index", model);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String validate(@RequestParam String code, RedirectAttributes attributes) {
-
+    @PostMapping("/code")
+    public ModelAndView validate (@RequestParam(name="code") String code, RedirectAttributes ra) {
 
         if (code.equalsIgnoreCase("bushido")) {
-            attributes.addAttribute("info", "Correct");
-            return "redirect:/confirmed";
-        }
-        else {
 
-            attributes.addAttribute("error", "You must train harder");
-            return "redirect:/";
+            ModelMap model = new ModelMap();
+            List<String> bushido = Arrays.asList("Loyalty", "Courage", "Veracity", "Composition", "Honor");
+            model.addAttribute("valid", true);
+            model.addAttribute("code", bushido);
+            return new ModelAndView("index", model);
         }
+        else
+            ra.addAttribute("valid", false);
+            return new ModelAndView("redirect:/", ra.getFlashAttributes());
     }
 }
