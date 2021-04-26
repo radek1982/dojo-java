@@ -1,0 +1,19 @@
+
+.questContainer {
+    display: flex;
+}
+
+.questContainer form {
+    width: 300px;
+    border: 1px solid red;
+    text-align: center;
+    padding: 10px;
+}
+
+.logContainer p.won {
+    color: green;
+}
+
+.logContainer p.lost {
+    color: red;
+}

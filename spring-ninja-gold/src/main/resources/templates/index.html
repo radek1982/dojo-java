@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ninja Gold</title>
+<link rel="stylesheet" th:href="@{main.css}">
+</head>
+
+<body>
+<p th:text="'Gold '  + ${gold}"></p>
+
+<!--/*@thymesVar id="q" type="com.wazny.Quest"*/-->
+<div class="questContainer">
+    <form th:each="q: ${quests}" method="POST" action="/takeQuest">
+        <h2 th:text="${q.name}"></h2>
+        <p th:text="${q.getDescription()}"></p>
+        <input name="quest" th:value="${q.name}" type="hidden">
+        <input type="submit" value="take">
+    </form>
+</div>
+<div class="logContainer">
+    <p> Logs</p>
+    <p th:each = "l: ${log}" th:text="${l.toString()}" th:class="${l.getOutcome()}">
+    </p>
+</div>
+</body>
+</html>
